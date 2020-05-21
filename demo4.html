@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1500">
+    <title>测试</title>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    <script src="./vue.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 主题：指令练习 v-once只渲染元素和组件一次 -->
+    <div id="app">
+        <h1 v-once>{{title}}</h1>
+        <h2>{{say()}}
+            <a v-bind:href="link">sksk</a>
+        </h2>
+        <p v-html="finsh">baidu </p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                title: '课程',
+                link: 'tintian',
+                finsh: '<a href="sss">baidu</a>'
+            },
+            methods: {
+                say: function() {
+                    this.add = 'hello';
+                    return this.add;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

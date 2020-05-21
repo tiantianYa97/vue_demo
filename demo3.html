@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1500">
+    <title>测试</title>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    <script src="./vue.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 主题：指令练习 -->
+    <div id="app">
+        <p>tiantian is {{age}}{{sex}}</p>
+        <p>my age*3={{age*3}}</p>
+        <p>{{random()}}</p>
+        <img v-bind:src="image" alt="">
+        <input type="text" v-bind:value="name">
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                age: 23,
+                sex: 'gril',
+                finsh: '<a href="sss">baidu</a>',
+                image: 'sss',
+                name: 'keke'
+            },
+            methods: {
+                random: function() {
+
+                    return Math.random();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

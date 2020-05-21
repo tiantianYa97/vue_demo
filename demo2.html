@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1500">
+    <title>测试</title>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    <script src="./vue.min.js"></script>
+
+</head>
+
+<body>
+    <!--
+        主题：.stop
+        先弹出jis，后弹出sjoo
+        只弹出jis，<button @click.stop="doThis">阻止单事件传播</button>
+        我自己的理解，感觉类似事件冒泡
+    -->
+    <div id="app" v-on:click='hidetip'>
+        <button @click="doThis">阻止单事件传播</button>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                hidetip: function() {
+                    alert('sjoo');
+                },
+                doThis: function() {
+                    alert('jis');
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1500">
+    <title>测试</title>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    <script src="./vue.min.js"></script>
+
+</head>
+<!--主题：
+双向数据绑定；
+----------------------------------------
+笔记： 
+1、v-on:click='hidetip'可简写@click="hidetip" @ 这种是一种vue的语法糖,名叫缩写,绑定事件的缩写； 
+2、v-if判断show_tooltip，为true则显示；
+3、stop 这种用法是vue的一种语法糖,名叫 事件修饰符 ,这里的是阻止单击事件冒泡；
+4、input用 v-model 双向数据绑定;
+-->
+
+<body>
+
+    <div id="app" v-on:click='hidetip'>
+        <div class="tooltip" v-if="show_tooltip" @click.stop>
+            <input type="text" v-model="input_text">
+        </div>
+        <p v-on:click.stop="toggle">{{input_text}}</p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                input_text: 'cctt',
+                show_tooltip: true,
+
+            },
+            methods: {
+                hidetip: function() {
+                    this.show_tooltip = false;
+                    // this可以调用vue实例的内容，也就是this指向当前vue实例的作用域
+                    alert('dd');
+                    // <div class="tooltip" v-if="show_tooltip" @click.stop>
+                    // 如果去掉@click.stop，点击input会弹出来dd,点击p弹出ss
+
+                },
+                toggle: function() {
+                    alert('ss')
+                        // v-on:click.stop="toggle"
+                        // 如果去掉.stop，点击p会弹出ss，再弹dd
+                    this.show_tooltip = !this.show_tooltip;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
