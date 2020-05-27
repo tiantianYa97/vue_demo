@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1500">
+    <title>组件</title>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    <script src="./vue.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 主题：
+        全局注册
+        Vue.compent('my-component',{
+
+        })
+        局部注册
+        important HelloWorld from './components/HelloWorld'
+        export default{
+            components:{
+                HelloWorld
+            }
+        }
+        区别：全局是挂载在Vue.options.components下，局部组件挂载在vm,$options.components下，所以全局注册的组件能被任意使用
+        组件开发必备知识：
+        1、name组件的名称，必填
+        <tian-ke></tian-ke>
+        </tian>
+        name:'tianKe'  js 中使用驼峰式命令，HTML 使用kebab-case命名。
+        2、props组件属性，父子组件通信，可通过this.msg访问
+        <div>{{msg}}</div>
+        props:{
+            msg:{
+                type:String,
+                default:''
+            }
+        }
+        show:Boolean //默认false
+        msg:[String,Boolean] //多种类型
+        3、computed
+        处理data或者props中的属性，并返回一个新属性
+        <div>{{msg}}</div>
+        computed:{
+            msg(){
+                return 'hrllo'+this.msg;
+
+            }
+        }
+        因为props，data和computed在编译阶段都会作为vm的属性合并，所以不可重名
+        4、render函数描述template
+        <tian-ke></tian-ke>
+        export default{
+            name:'tianKe',
+            props:{
+                tag:{
+                    type:String,
+                    default:'div'
+                },
+            },
+            render(h){
+                return h(
+                    this.tag,
+                    {class:'demo'},
+                    this.$slots.defalut
+                )
+            }
+            }
+        }
+        render 中的 h 其实就是 createElement，它接受三个参数，返回一个 vnode  
+        h 参数解释：  
+        args1: {string | Function | Object} 用于提供DOM的html内容  
+        args2: {Object} 设置DOM样式、属性、绑定事件之类  
+        args3: {array} 用于设置分发的内容
+        注：vue编译顺序： template–> compile -> render -> vnode -> patch -> DOM       
+        5、slot  
+        分发内容，有传入时显示，无传入dom时显示默认，分为无名和具名两种，this.slots.default默认指向无名插槽。多个slot时用法
+        this.slots.name
+        <tian-ke>
+               <div slot="header">header</div>
+               <div class="body" slot='body'>
+                  <input type="text"/>
+               </div>
+               <div slot="footer">footer</div>
+               <button class='btn'>button</button> 
+        </tian-ke>
+        <template>
+          <div>
+              <slot name="header"></slot>
+              <slot name="body"></slot>
+              <slot name="footer"></slot>
+              <slot></slot>
+          </div>     
+        </template>
+        <script>
+           export deafult{
+               name:'tianKe',
+               mounted(){
+                   this.$slots.header;
+                   this.$slots.default;//得到一个vnode，没有被包含在具名插槽中的节点，这里是button
+               }
+           }
+
+        </script>
+        6、class定义子组件的类名
+    -->
+    <div id="app">
+
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+
+            }
+        })
+    </script>
+</body>
+
+</html>

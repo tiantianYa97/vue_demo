@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1500">
+    <title>导航切换</title>
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+    <script src="./vue.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 主题：导航切换
+    .prevent阻止默认事件，为了阻止a标签的点击自动跳转或刷新页面的默认事件
+    : 是v-bind的缩写
+    @ 是v-on的缩写
+    show的更新取决于数据属性 item.active是否为真值
+    mk_active(item,$index)控制item的active属性。能够传入$index,这个是特殊的值，是指vue的v-for的遍历的当前索引
+    -->
+    <div id="app">
+        <nav @click.prevent>
+            <a v-for="(item,$index) in items" :class="{'show':item.active}" @click="mk_active(item,$index)">
+                {{item.name}}
+            </a>
+        </nav>
+        <p>your chose <b>{{active}}</b></p>
+    </div>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                active: 'html',
+                items: [{
+                    name: 'html',
+                    active: true //通过控制active的值(布尔值)来做一些处理,例如为true的时候show,为false的hide
+                }, {
+                    name: 'js',
+                    active: false
+                }, {
+                    name: 'img',
+                    active: false
+                }]
+            },
+            methods: {
+                mk_active: function(item, index) { //使用传入的当前的v-for循环的遍历项和当前索引
+                    this.active = item.name;
+                    for (var i = 0; i < this.items.length; i++) { //将所有item设置为false
+                        this.items[i].active = false;
+                    }
+                    this.items[index].active = true; //然后单独设置选中的item为true
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
